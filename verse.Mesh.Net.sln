@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.InventoryService", "verse.Mesh.Net.InventoryService\verse.Mesh.Net.InventoryService.csproj", "{1BE91115-6108-415A-A21D-925C495D9F47}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Microservices", "1.Microservices", "{64753E2B-8A78-4049-B331-AC4034D4DB76}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{64753E2B-8A78-4049-B331-AC4034D4DB76}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.CartService", "verse.Mesh.Net.CartService\verse.Mesh.Net.CartService.csproj", "{4242005F-0087-49E4-972B-1E4D75AF2534}"
 EndProject
@@ -16,6 +16,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.RecommendationService", "verse.Mesh.Net.RecommendationService\verse.Mesh.Net.RecommendationService.csproj", "{2B41A4DC-486A-4100-AB99-8CE79A2FDB86}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.CheckoutService", "verse.Mesh.Net.CheckoutService\verse.Mesh.Net.CheckoutService.csproj", "{6440C639-2BFD-4063-8BAC-5FAF289A011A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3B29985E-05CD-4340-9403-EB53EBA7FDA5}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
