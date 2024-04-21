@@ -19,6 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.CheckoutServ
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3B29985E-05CD-4340-9403-EB53EBA7FDA5}"
 	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 	EndProjectSection
