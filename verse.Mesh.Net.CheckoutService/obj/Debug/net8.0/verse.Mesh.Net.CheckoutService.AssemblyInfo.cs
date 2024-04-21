@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("verse.Mesh.Net.CheckoutService")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d0d509800853181e3a575ddff52ed876b01e7b3e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c96f1ea1ffa73777ffbf7b88ca5265c9ba9ccab7")]
 [assembly: System.Reflection.AssemblyProductAttribute("verse.Mesh.Net.CheckoutService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("verse.Mesh.Net.CheckoutService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
