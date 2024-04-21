@@ -17,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.Recommendati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.CheckoutService", "verse.Mesh.Net.CheckoutService\verse.Mesh.Net.CheckoutService.csproj", "{6440C639-2BFD-4063-8BAC-5FAF289A011A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.SolutionItems", "0.SolutionItems", "{D2DD3DB6-72B6-4382-B5DC-7B1DFD5C74B2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
