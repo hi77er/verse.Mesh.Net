@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "ulDm+2g/hIexZkVxH5YN/oaiqT5n9byNKM9yxQfSpuQUs3rLST2e8xQ+irzxSYWQVDqa/AWvECI63YsuORV4jg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\kkras\\Source\\repos\\verse\\verse.Mesh.Net\\verse.Mesh.Net.CartService\\verse.Mesh.Net.CartService.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\kkras\\.nuget\\packages\\microsoft.dotnet.ilcompiler\\8.0.4\\microsoft.dotnet.ilcompiler.8.0.4.nupkg.sha512",
+    "C:\\Users\\kkras\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.4\\microsoft.net.illink.tasks.8.0.4.nupkg.sha512",
+    "C:\\Users\\kkras\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.6\\microsoft.visualstudio.azure.containers.tools.targets.1.19.6.nupkg.sha512",
+    "C:\\Users\\kkras\\.nuget\\packages\\runtime.win-x64.microsoft.dotnet.ilcompiler\\8.0.4\\runtime.win-x64.microsoft.dotnet.ilcompiler.8.0.4.nupkg.sha512"
+  ],
+  "logs": []
+}

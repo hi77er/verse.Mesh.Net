@@ -1,0 +1,11 @@
+@verse.Mesh.Net.CheckoutService_HostAddress = http://localhost:5093
+
+GET {{verse.Mesh.Net.CheckoutService_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{verse.Mesh.Net.CheckoutService_HostAddress}}/todos/1
+Accept: application/json
+
+###
