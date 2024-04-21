@@ -267,3 +267,4 @@ log*.txt
 
 *.AssemblyInfo.cs
 *.AssemblyInfoInputs.cache
+.github/
