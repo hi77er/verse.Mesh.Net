@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.InventoryService", "verse.Mesh.Net.InventoryService\verse.Mesh.Net.InventoryService.csproj", "{1BE91115-6108-415A-A21D-925C495D9F47}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{64753E2B-8A78-4049-B331-AC4034D4DB76}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Microservices", "1. Microservices", "{64753E2B-8A78-4049-B331-AC4034D4DB76}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.CartService", "verse.Mesh.Net.CartService\verse.Mesh.Net.CartService.csproj", "{4242005F-0087-49E4-972B-1E4D75AF2534}"
 EndProject
@@ -17,13 +17,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.Recommendati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.CheckoutService", "verse.Mesh.Net.CheckoutService\verse.Mesh.Net.CheckoutService.csproj", "{6440C639-2BFD-4063-8BAC-5FAF289A011A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{446A2421-CA30-49B4-B609-EC214BE10AB6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. Solution Items", "0. Solution Items", "{446A2421-CA30-49B4-B609-EC214BE10AB6}"
 	ProjectSection(SolutionItems) = preProject
 		.dockerignore = .dockerignore
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Core", "4. Core", "{CF924777-687A-410E-B838-662E7AD3B9F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Infrastructure", "3. Infrastructure", "{536AEFFA-0351-4C6B-8BD2-86289875E223}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. UseCases", "2. UseCases", "{D3972FC2-3C4E-476E-8C6E-7D5CF026B0E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
