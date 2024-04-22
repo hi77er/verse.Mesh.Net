@@ -31,11 +31,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Infrastructure", "3. Inf
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. UseCases", "2. UseCases", "{D3972FC2-3C4E-476E-8C6E-7D5CF026B0E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "verse.Mesh.Net.Core", "verse.Mesh.Net.Core\verse.Mesh.Net.Core.csproj", "{55E1DCB6-AE98-41B5-9ABC-D9EA5FAB38B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.Core", "verse.Mesh.Net.Core\verse.Mesh.Net.Core.csproj", "{55E1DCB6-AE98-41B5-9ABC-D9EA5FAB38B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "verse.Mesh.Net.Infrastructure", "verse.Mesh.Net.Infrastructure\verse.Mesh.Net.Infrastructure.csproj", "{8C2C44B6-4389-4A04-A010-469B7409AF4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.Infrastructure", "verse.Mesh.Net.Infrastructure\verse.Mesh.Net.Infrastructure.csproj", "{8C2C44B6-4389-4A04-A010-469B7409AF4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "verse.Mesh.Net.UseCases", "verse.Mesh.Net.UseCases\verse.Mesh.Net.UseCases.csproj", "{27730A9C-0ABF-4200-BDF4-3C3191031002}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.UseCases", "verse.Mesh.Net.UseCases\verse.Mesh.Net.UseCases.csproj", "{27730A9C-0ABF-4200-BDF4-3C3191031002}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7. Functional Tests", "7. Functional Tests", "{7E897855-E90C-405B-83F3-0593AC8C64A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Unit Tests", "5. Unit Tests", "{0BF959D6-787A-4EEE-98FF-24FFE23AFE3E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Integration Tests", "6. Integration Tests", "{0D68E201-2ED7-4536-9585-AC199754A0D3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.UnitTests", "verse.Mesh.Net.UnitTests\verse.Mesh.Net.UnitTests.csproj", "{10000BCC-93B7-4C67-A6D1-55C40388CFB0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.IntegrationTests", "verse.Mesh.Net.IntegrationTests\verse.Mesh.Net.IntegrationTests.csproj", "{ED5A6224-1AE6-430D-A430-AD733043645B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.FunctionalTests", "verse.Mesh.Net.FunctionalTests\verse.Mesh.Net.FunctionalTests.csproj", "{96B58413-121A-4994-8197-71C5FC37F97F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +91,18 @@ Global
 		{27730A9C-0ABF-4200-BDF4-3C3191031002}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27730A9C-0ABF-4200-BDF4-3C3191031002}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27730A9C-0ABF-4200-BDF4-3C3191031002}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10000BCC-93B7-4C67-A6D1-55C40388CFB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10000BCC-93B7-4C67-A6D1-55C40388CFB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10000BCC-93B7-4C67-A6D1-55C40388CFB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10000BCC-93B7-4C67-A6D1-55C40388CFB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED5A6224-1AE6-430D-A430-AD733043645B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED5A6224-1AE6-430D-A430-AD733043645B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED5A6224-1AE6-430D-A430-AD733043645B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED5A6224-1AE6-430D-A430-AD733043645B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96B58413-121A-4994-8197-71C5FC37F97F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96B58413-121A-4994-8197-71C5FC37F97F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96B58413-121A-4994-8197-71C5FC37F97F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96B58413-121A-4994-8197-71C5FC37F97F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +117,9 @@ Global
 		{55E1DCB6-AE98-41B5-9ABC-D9EA5FAB38B5} = {CF924777-687A-410E-B838-662E7AD3B9F5}
 		{8C2C44B6-4389-4A04-A010-469B7409AF4D} = {536AEFFA-0351-4C6B-8BD2-86289875E223}
 		{27730A9C-0ABF-4200-BDF4-3C3191031002} = {D3972FC2-3C4E-476E-8C6E-7D5CF026B0E3}
+		{10000BCC-93B7-4C67-A6D1-55C40388CFB0} = {0BF959D6-787A-4EEE-98FF-24FFE23AFE3E}
+		{ED5A6224-1AE6-430D-A430-AD733043645B} = {0D68E201-2ED7-4536-9585-AC199754A0D3}
+		{96B58413-121A-4994-8197-71C5FC37F97F} = {7E897855-E90C-405B-83F3-0593AC8C64A9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5678EF43-6951-4B59-9015-24AEE4F645EC}
