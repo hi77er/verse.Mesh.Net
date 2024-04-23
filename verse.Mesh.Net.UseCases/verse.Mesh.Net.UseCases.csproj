@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ardalis.Result" Version="8.0.0" />
     <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\verse.Mesh.Net.Core\verse.Mesh.Net.Core.csproj" />
   </ItemGroup>
 
 </Project>

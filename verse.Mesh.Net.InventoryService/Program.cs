@@ -1,6 +1,6 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Text.Json.Serialization;
+using Ardalis.ListStartupServices;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using MediatR;
@@ -9,7 +9,6 @@ using Serilog.Extensions.Logging;
 using verse.Mesh.Net.Core.CartAggregate;
 using verse.Mesh.Net.Core.Shared;
 using verse.Mesh.Net.Core.Shared.Behavior;
-using verse.Mesh.Net.Core.Shared.Config;
 using verse.Mesh.Net.Infrastructure;
 using verse.Mesh.Net.UseCases;
 
@@ -26,41 +25,29 @@ var builder = WebApplication.CreateSlimBuilder(args);
 builder.Host.UseSerilog((_, config) => config.ReadFrom.Configuration(builder.Configuration));
 var microsoftLogger = new SerilogLoggerFactory(logger).CreateLogger<Program>();
 
-builder.Services.ConfigureHttpJsonOptions(options =>
-{
-  options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
-});
+builder.Services
+  .ConfigureHttpJsonOptions(options =>
+  {
+    options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
+  });
 
-builder.Services.AddFastEndpoints()
-                .SwaggerDocument(o =>
-                {
-                  o.ShortSchemaNames = true;
-                });
+builder.Services
+  .AddFastEndpoints()
+  .SwaggerDocument(o =>
+  {
+    o.ShortSchemaNames = true;
+  });
 
 ConfigureMediatR();
 
 builder.Services.AddInfrastructureServices(builder.Configuration, microsoftLogger);
-
-if (builder.Environment.IsDevelopment())
-{
-  // Use a local test email server
-  // See: https://ardalis.com/configuring-a-local-test-email-server/
-  //builder.Services.AddScoped<IEmailSender, MimeKitEmailSender>();
-
-  // Otherwise use this:
-  //builder.Services.AddScoped<IEmailSender, FakeEmailSender>();
-}
-else
-{
-  //builder.Services.AddScoped<IEmailSender, MimeKitEmailSender>();
-}
-
 
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
   app.UseDeveloperExceptionPage();
+  app.UseShowAllServicesMiddleware(); // see https://github.com/ardalis/AspNetCoreStartupServices
 }
 else
 {
