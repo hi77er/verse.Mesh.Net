@@ -1,6 +1,6 @@
 ﻿namespace verse.Mesh.Net.UseCases;
 
-public class Class1
+public class SomeUseCase
 {
 
 }
