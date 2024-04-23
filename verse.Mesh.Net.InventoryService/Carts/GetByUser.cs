@@ -1,11 +1,10 @@
 ﻿using Ardalis.Result;
 using FastEndpoints;
 using MediatR;
-using verse.Mesh.Net.InventoryService.Carts;
 using verse.Mesh.Net.UseCases.Carts;
 using verse.Mesh.Net.UseCases.Carts.Get;
 
-namespace Clean.Architecture.Web.Contributors;
+namespace verse.Mesh.Net.InventoryService.Carts;
 
 /// <summary>
 /// Get a cart by a given userId.
