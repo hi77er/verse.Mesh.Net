@@ -1,11 +1,11 @@
 @verse.Mesh.Net.InventoryService_HostAddress = http://localhost:5239
 
-GET {{verse.Mesh.Net.InventoryService_HostAddress}}/todos/
+GET {{verse.Mesh.Net.InventoryService_HostAddress}}/health/
 Accept: application/json
 
 ###
 
-GET {{verse.Mesh.Net.InventoryService_HostAddress}}/todos/1
+GET {{verse.Mesh.Net.InventoryService_HostAddress}}/carts/c56a4180-65aa-42ec-a945-5fd21dec0538
 Accept: application/json
 
 ###
