@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "http": {
+    "HTTP (Browser)": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "todos",
+      "launchUrl": "health",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
