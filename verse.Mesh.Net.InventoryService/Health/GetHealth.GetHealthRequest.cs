@@ -5,5 +5,5 @@ public class GetHealthRequest
   public const string Route = "/health";
   public static string BuildRoute() => Route;
 
-  public Guid UserId { get; set; }
+  public string ServiceName { get; set; } = "Inventory Service";
 }

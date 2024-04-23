@@ -10,7 +10,11 @@ using verse.Mesh.Net.Core.CartAggregate;
 using verse.Mesh.Net.Core.Shared;
 using verse.Mesh.Net.Core.Shared.Behavior;
 using verse.Mesh.Net.Infrastructure;
+using verse.Mesh.Net.InventoryService.Carts;
+using verse.Mesh.Net.InventoryService.Health;
 using verse.Mesh.Net.UseCases;
+using verse.Mesh.Net.UseCases.Carts;
+using verse.Mesh.Net.UseCases.Carts.Get;
 
 
 var logger = Log.Logger = new LoggerConfiguration()
@@ -110,9 +114,16 @@ void ConfigureMediatR()
   builder.Services.AddScoped<IDomainEventDispatcher, MediatRDomainEventDispatcher>();
 }
 
-public record Todo(int Id, string? Title, DateOnly? DueBy = null, bool IsComplete = false);
-
-[JsonSerializable(typeof(Todo[]))]
+[JsonSerializable(typeof(ErrorResponse))]
+[JsonSerializable(typeof(GetCartByUserRequest))]
+[JsonSerializable(typeof(GetHealthRequest))]
+[JsonSerializable(typeof(CartRecord))]
+[JsonSerializable(typeof(CartItemRecord))]
+[JsonSerializable(typeof(ProductRecord))]
+[JsonSerializable(typeof(CartDTO))]
+[JsonSerializable(typeof(CartItemDTO))]
+[JsonSerializable(typeof(ProductDTO))]
+[JsonSerializable(typeof(GetCartByUserQuery))]
 internal partial class AppJsonSerializerContext : JsonSerializerContext
 {
 

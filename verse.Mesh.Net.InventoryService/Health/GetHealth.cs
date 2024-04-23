@@ -14,10 +14,10 @@ public class GetHealth : Endpoint<GetHealthRequest, string>
   }
 
   public override async Task HandleAsync(
-    GetHealthRequest request, 
+    GetHealthRequest request,
     CancellationToken cancellationToken)
   {
-    Response = "Alive";
+    Response = $"{request.ServiceName} is Alive!";
 
     await Task.CompletedTask;
 
