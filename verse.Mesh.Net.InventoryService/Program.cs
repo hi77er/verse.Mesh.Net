@@ -12,7 +12,6 @@ using verse.Mesh.Net.Core.Shared.Behavior;
 using verse.Mesh.Net.Infrastructure;
 using verse.Mesh.Net.InventoryService.Carts;
 using verse.Mesh.Net.InventoryService.Health;
-using verse.Mesh.Net.UseCases;
 using verse.Mesh.Net.UseCases.Carts;
 using verse.Mesh.Net.UseCases.Carts.Get;
 using verse.Mesh.Net.UseCases.Products;
@@ -48,6 +47,7 @@ ConfigureMediatR();
 builder.Services.AddInfrastructureServices(builder.Configuration, microsoftLogger);
 
 var app = builder.Build();
+
 
 if (app.Environment.IsDevelopment())
 {
@@ -108,7 +108,7 @@ void ConfigureMediatR()
   var mediatRAssemblies = new[]
   {
     Assembly.GetAssembly(typeof(Cart)), // Core
-    Assembly.GetAssembly(typeof(SomeUseCase)) // UseCases
+    Assembly.GetAssembly(typeof(CartDTO)) // UseCases
   };
   builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(mediatRAssemblies!));
   builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));

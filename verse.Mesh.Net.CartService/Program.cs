@@ -109,7 +109,7 @@ void ConfigureMediatR()
   var mediatRAssemblies = new[]
   {
     Assembly.GetAssembly(typeof(Cart)), // Core
-    Assembly.GetAssembly(typeof(SomeUseCase)) // UseCases
+    Assembly.GetAssembly(typeof(CartDTO)) // UseCases
   };
   builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(mediatRAssemblies!));
   builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));

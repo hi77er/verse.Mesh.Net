@@ -11,6 +11,7 @@ using verse.Mesh.Net.Core.Shared;
 using verse.Mesh.Net.Core.Shared.Behavior;
 using verse.Mesh.Net.Infrastructure;
 using verse.Mesh.Net.UseCases;
+using verse.Mesh.Net.UseCases.Carts;
 
 
 var logger = Log.Logger = new LoggerConfiguration()
@@ -103,7 +104,7 @@ void ConfigureMediatR()
   var mediatRAssemblies = new[]
   {
     Assembly.GetAssembly(typeof(Cart)), // Core
-    Assembly.GetAssembly(typeof(SomeUseCase)) // UseCases
+    Assembly.GetAssembly(typeof(CartDTO)) // UseCases
   };
   builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(mediatRAssemblies!));
   builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
