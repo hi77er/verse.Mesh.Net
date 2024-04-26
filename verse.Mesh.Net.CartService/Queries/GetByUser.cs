@@ -1,10 +1,11 @@
 ﻿using Ardalis.Result;
 using FastEndpoints;
 using MediatR;
+using verse.Mesh.Net.CartService.Models;
 using verse.Mesh.Net.UseCases.Carts;
 using verse.Mesh.Net.UseCases.Carts.Get;
 
-namespace verse.Mesh.Net.InventoryService.Carts;
+namespace verse.Mesh.Net.CartService.Queries;
 
 /// <summary>
 /// Get a cart by a given userId.
@@ -33,13 +34,13 @@ public class GetByUser(IMediator _mediator) : Endpoint<GetCartByUserRequest, Car
 
     if (result.IsSuccess)
     {
-      var response = ExtractResponse(result);
+      var response = Map(result);
 
       Response = response;
     }
   }
 
-  private static CartRecord ExtractResponse(Result<CartDTO> result)
+  private static CartRecord Map(Result<CartDTO> result)
   {
     var cartItemRecords = result.Value.CartItems
             .Select(x =>

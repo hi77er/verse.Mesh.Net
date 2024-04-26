@@ -1,7 +1,7 @@
 ﻿using FastEndpoints;
 using FluentValidation;
 
-namespace verse.Mesh.Net.InventoryService.Carts;
+namespace verse.Mesh.Net.CartService.Queries;
 
 /// <summary>
 /// See: https://fast-endpoints.com/docs/validation

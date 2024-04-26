@@ -15,6 +15,7 @@ using verse.Mesh.Net.InventoryService.Health;
 using verse.Mesh.Net.UseCases;
 using verse.Mesh.Net.UseCases.Carts;
 using verse.Mesh.Net.UseCases.Carts.Get;
+using verse.Mesh.Net.UseCases.Products;
 
 
 var logger = Log.Logger = new LoggerConfiguration()
@@ -115,10 +116,7 @@ void ConfigureMediatR()
 }
 
 [JsonSerializable(typeof(ErrorResponse))]
-[JsonSerializable(typeof(GetCartByUserRequest))]
 [JsonSerializable(typeof(GetHealthRequest))]
-[JsonSerializable(typeof(CartRecord))]
-[JsonSerializable(typeof(CartItemRecord))]
 [JsonSerializable(typeof(ProductRecord))]
 [JsonSerializable(typeof(CartDTO))]
 [JsonSerializable(typeof(CartItemDTO))]
