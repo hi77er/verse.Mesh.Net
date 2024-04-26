@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Text.Json.Serialization;
 using Ardalis.ListStartupServices;
+using Clean.Architecture.Infrastructure.Data;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using MediatR;
@@ -10,12 +11,12 @@ using verse.Mesh.Net.Core.CartAggregate;
 using verse.Mesh.Net.Core.Shared;
 using verse.Mesh.Net.Core.Shared.Behavior;
 using verse.Mesh.Net.Infrastructure;
+using verse.Mesh.Net.Infrastructure.Data.MemCache;
 using verse.Mesh.Net.InventoryService.Carts;
 using verse.Mesh.Net.InventoryService.Health;
 using verse.Mesh.Net.UseCases.Carts;
 using verse.Mesh.Net.UseCases.Carts.Get;
 using verse.Mesh.Net.UseCases.Products;
-
 
 var logger = Log.Logger = new LoggerConfiguration()
   .Enrich.FromLogContext()
@@ -44,15 +45,17 @@ builder.Services
 
 ConfigureMediatR();
 
-builder.Services.AddInfrastructureServices(builder.Configuration, microsoftLogger);
+var isDevelopmentEnv = builder.Environment.IsDevelopment();
+builder.Services.AddInfrastructureServices(builder.Configuration, microsoftLogger, isDevelopmentEnv);
 
 var app = builder.Build();
-
 
 if (app.Environment.IsDevelopment())
 {
   app.UseDeveloperExceptionPage();
   app.UseShowAllServicesMiddleware(); // see https://github.com/ardalis/AspNetCoreStartupServices
+
+  SeedDatabase(app);
 }
 else
 {
@@ -64,8 +67,6 @@ app.UseFastEndpoints()
     .UseSwaggerGen(); // Includes AddFileServer and static files middleware
 
 app.UseHttpsRedirection();
-
-SeedDatabase(app);
 
 //var sampleTodos = new Todo[] {
 //    new(1, "Walk the dog"),
@@ -86,21 +87,20 @@ app.Run();
 
 static void SeedDatabase(WebApplication app)
 {
-  //using var scope = app.Services.CreateScope();
-  //var services = scope.ServiceProvider;
+  using var scope = app.Services.CreateScope();
+  var services = scope.ServiceProvider;
 
-  //try
-  //{
-  //  var context = services.GetRequiredService<AppDbContext>();
-  //  //          context.Database.Migrate();
-  //  context.Database.EnsureCreated();
-  //  SeedData.Initialize(services);
-  //}
-  //catch (Exception ex)
-  //{
-  //  var logger = services.GetRequiredService<ILogger<Program>>();
-  //  logger.LogError(ex, "An error occurred seeding the DB. {exceptionMessage}", ex.Message);
-  //}
+  try
+  {
+    var service = services.GetRequiredService<IDistributedCacheAdapter>();
+    var dataSeeder = new RedisDataSeeder(service);
+    dataSeeder.Seed();
+  }
+  catch (Exception ex)
+  {
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "An error occurred seeding the DB. {exceptionMessage}", ex.Message);
+  }
 }
 
 void ConfigureMediatR()

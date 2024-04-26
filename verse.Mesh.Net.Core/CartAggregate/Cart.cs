@@ -2,8 +2,8 @@
 
 namespace verse.Mesh.Net.Core.CartAggregate;
 
-public class Cart : EntityBase, IAggregateRoot
+public class Cart(Guid userId, IEnumerable<CartItem> items) : EntityBase, IAggregateRoot
 {
-  public Guid UserId { get; set; }
-  public IEnumerable<CartItem> Items { get; set; } = Enumerable.Empty<CartItem>();
+  public Guid UserId { get; set; } = userId;
+  public IEnumerable<CartItem> Items { get; set; } = items;
 }

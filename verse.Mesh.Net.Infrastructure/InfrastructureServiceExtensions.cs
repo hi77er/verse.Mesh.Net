@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
-using StackExchange.Redis.Extensions.Core.Configuration;
 using verse.Mesh.Net.Infrastructure.Data.MemCache;
 
 namespace verse.Mesh.Net.Infrastructure;
@@ -12,28 +11,35 @@ public static class InfrastructureServiceExtensions
   public static IServiceCollection AddInfrastructureServices(
     this IServiceCollection services,
     ConfigurationManager config,
-    ILogger logger)
+    ILogger logger,
+    bool isDevelopmentEnv)
   {
-    var redisConfigOptionsName = "RedisConfiguration";
-
     // Options pattern for strongly typed RedisConfiguration from appSettings.json:
     // (for "Bind()" method Microsoft.Etensions.Configuration.Binder package was installed)
-    var redisConfig = new RedisConfiguration();
+    var redisConfigOptionsName = "RedisOptions";
+    var redisConfig = new RedisOptions();
     config.GetSection(redisConfigOptionsName).Bind(redisConfig);
 
-    // Register Redis connection
-    services.AddSingleton<IConnectionMultiplexer>(sp =>
+    if (isDevelopmentEnv)
     {
-      // Options pattern is not needed for getting the RedisConfiguration.
-      // It is only for DI purpose.
-      var options = config.GetSection(redisConfigOptionsName).Get<RedisConfiguration>();
-      var connStr = options?.ConnectionString ?? string.Empty;
+      services.AddMemoryCache();
+      services.AddScoped<IDistributedCacheAdapter, MemoryCacheService>();
+    }
+    else
+    {
+      // Register Redis connection
+      services.AddSingleton<IConnectionMultiplexer>(sp =>
+      {
+        // Options pattern is not needed for getting the RedisConfiguration.
+        // It is only for DI purpose.
+        var options = config.GetSection(redisConfigOptionsName).Get<RedisOptions>();
+        var connStr = options?.ConnectionString ?? string.Empty;
 
-      return ConnectionMultiplexer.Connect(connStr);
-    });
+        return ConnectionMultiplexer.Connect(connStr);
+      });
 
-
-
+      services.AddScoped<IDistributedCacheAdapter, RedisCacheService>();
+    }
 
     //string? connectionString = config.GetConnectionString("SqliteConnection");
     //Guard.Against.Null(connectionString);
@@ -42,7 +48,6 @@ public static class InfrastructureServiceExtensions
     //services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
     //services.AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>));
 
-    services.AddScoped<IRedisService, RedisService>();
     //services.AddScoped<IDeleteContributorService, DeleteContributorService>();
 
     //services.Configure<MailserverConfiguration>(config.GetSection("Mailserver"));

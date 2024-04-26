@@ -41,7 +41,8 @@ builder.Services
 
 ConfigureMediatR();
 
-builder.Services.AddInfrastructureServices(builder.Configuration, microsoftLogger);
+var isDevelopmentEnv = builder.Environment.IsDevelopment();
+builder.Services.AddInfrastructureServices(builder.Configuration, microsoftLogger, isDevelopmentEnv);
 
 var app = builder.Build();
 
@@ -49,6 +50,8 @@ if (app.Environment.IsDevelopment())
 {
   app.UseDeveloperExceptionPage();
   app.UseShowAllServicesMiddleware(); // see https://github.com/ardalis/AspNetCoreStartupServices
+
+  SeedDatabase(app);
 }
 else
 {

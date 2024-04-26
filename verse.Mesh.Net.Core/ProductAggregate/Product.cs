@@ -1,8 +1,7 @@
-﻿using System;
-using Ardalis.GuardClauses;
+﻿using Ardalis.GuardClauses;
 using verse.Mesh.Net.Core.Shared;
 
-namespace verse.Mesh.Net.Core.CartAggregate;
+namespace verse.Mesh.Net.Core.ProductAggregate;
 
 public class Product(string name, decimal price, string description = "") : EntityBase
 {
