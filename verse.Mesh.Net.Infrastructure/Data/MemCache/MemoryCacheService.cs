@@ -1,8 +1,6 @@
 ﻿using Ardalis.GuardClauses;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using StackExchange.Redis;
 using verse.Mesh.Net.Infrastructure.Data.Config;
 
 namespace verse.Mesh.Net.Infrastructure.Data.MemCache;
@@ -24,15 +22,30 @@ public class MemoryCacheService : IDistributedCacheAdapter
     this._memoryCache = memoryCache;
   }
 
-  public bool SetItem(string key, string val, int? expiresMin = null)
+  public async Task<bool> SetItemAsync<TItem>(string key, TItem val, int? expiresMin = null)
   {
-    var expiresSeconds = (expiresMin ?? this._memCacheExpiresMin) * 60;
+    Guard.Against.Null(val);
     Guard.Against.Null(this._memoryCache);
+    var expiresSeconds = (expiresMin ?? this._memCacheExpiresMin) * 60;
+
+    var now = DateTime.UtcNow;
+    var unixEpoch = DateTime.UnixEpoch;
+    long elapsedFromUnixTimeSeconds = (long)(now - unixEpoch).TotalSeconds;
 
     var result = this._memoryCache
-      .Set(key, val, DateTimeOffset.FromUnixTimeSeconds(expiresSeconds));
+      .Set(key, val, DateTimeOffset.FromUnixTimeSeconds(elapsedFromUnixTimeSeconds + expiresSeconds));
 
-    var succeeded = !string.IsNullOrEmpty(result);
-    return succeeded;
+    var succeeded = result is not null;
+    return await Task.FromResult(succeeded);
   }
+
+  public async Task<TItem?> GetItemAsync<TItem>(string key)
+  {
+    Guard.Against.Null(this._memoryCache);
+
+    var result = this._memoryCache.Get<TItem?>(key);
+
+    return await Task.FromResult(result);
+  }
+
 }

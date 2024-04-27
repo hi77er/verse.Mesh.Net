@@ -29,6 +29,6 @@ public class RedisDataSeeder
 
   public void Seed()
   {
-    this._cacheService.SetItem(Guid.NewGuid().ToString(), "Test 123", 10);
+    this._cacheService.SetItemAsync(Guid.NewGuid().ToString(), "Test 123", 10);
   }
 }

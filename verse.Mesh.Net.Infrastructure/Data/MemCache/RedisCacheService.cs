@@ -1,9 +1,9 @@
-﻿using Ardalis.GuardClauses;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Hosting;
+﻿using System.Text.Json;
+using Ardalis.GuardClauses;
 using Microsoft.Extensions.Options;
 using StackExchange.Redis;
 using verse.Mesh.Net.Infrastructure.Data.Config;
+using verse.Mesh.Net.Core.Extensions;
 
 namespace verse.Mesh.Net.Infrastructure.Data.MemCache;
 
@@ -24,15 +24,44 @@ public class RedisCacheService : IDistributedCacheAdapter
     this._db = redisConnection.GetDatabase();
   }
 
-  public bool SetItem(string key, string val, int? expiresMin = null)
+  public async Task<bool> SetItemAsync<TItem>(string key, TItem val, int? expiresMin = null)
   {
-    var expiresSeconds = (expiresMin ?? this._memCacheExpiresMin) * 60;
+    Guard.Against.Null(val);
     Guard.Against.Null(this._db);
+    var expiresSeconds = (expiresMin ?? this._memCacheExpiresMin) * 60;
 
-    var rKey = new RedisKey(key);
-    var rVal = new RedisValue(val);
+    var serializedValue = default(string);
+    if (val.IsByteArray())
+    {
+      throw new NotSupportedException("Byte array not supported for now.");
+    }
+    else if (val.IsScalar())
+    {
+      serializedValue = val?.ToString();
+    }
+    else
+    {
+      serializedValue = JsonSerializer.Serialize(val);
+    }
 
-    var succeeded = _db.StringSet(rKey, rVal, TimeSpan.FromSeconds(expiresSeconds));
+    var succeeded = await _db
+      .StringSetAsync(key, serializedValue, TimeSpan.FromSeconds(expiresSeconds));
+
     return succeeded;
   }
+
+  public async Task<T?> GetItemAsync<T>(string key)
+  {
+    Guard.Against.Null(this._db);
+
+    var redisValue = await this._db.StringGetAsync(key);
+
+    T? value = redisValue.HasValue
+      ? JsonSerializer.Deserialize<T?>(redisValue.ToString())
+      : default(T?);
+
+    return value;
+  }
+
+
 }

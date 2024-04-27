@@ -2,5 +2,7 @@
 
 public interface IDistributedCacheAdapter
 {
-  bool SetItem(string key, string val, int? expiresMin = null);
+  Task<bool> SetItemAsync<TItem>(string key, TItem val, int? expiresMin = null);
+
+  Task<TItem?> GetItemAsync<TItem>(string key);
 }
