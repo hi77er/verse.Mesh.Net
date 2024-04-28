@@ -1,10 +1,9 @@
-﻿using verse.Mesh.Net.Core.CartAggregate;
+﻿using Ardalis.GuardClauses;
+using verse.Mesh.Net.Core.CartAggregate;
 using verse.Mesh.Net.Core.ProductAggregate;
-using Microsoft.Extensions.DependencyInjection;
 using verse.Mesh.Net.Infrastructure.Data.MemCache;
-using Ardalis.GuardClauses;
 
-namespace Clean.Architecture.Infrastructure.Data;
+namespace verse.Mesh.Net.Infrastructure.Data;
 
 public class RedisDataSeeder
 {

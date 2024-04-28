@@ -1,6 +1,6 @@
 ﻿using FastEndpoints;
 
-namespace verse.Mesh.Net.FunctionalTests.InventoryService;
+namespace verse.Mesh.Net.InventoryService.FuctionalTests.ApiEndpoints;
 
 public class InventoryServiceTests
 {

@@ -20,11 +20,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\verse.Mesh.Net.CartService\verse.Mesh.Net.CartService.csproj" />
+    <Using Include="NUnit.Framework" />
   </ItemGroup>
 
   <ItemGroup>
-    <Using Include="NUnit.Framework" />
+    <ProjectReference Include="..\verse.Mesh.Net.Infrastructure\verse.Mesh.Net.Infrastructure.csproj" />
+    <ProjectReference Include="..\verse.Mesh.Net.InventoryService\verse.Mesh.Net.InventoryService.csproj" />
+    <ProjectReference Include="..\verse.Mesh.Net.UseCases\verse.Mesh.Net.UseCases.csproj" />
   </ItemGroup>
 
 </Project>

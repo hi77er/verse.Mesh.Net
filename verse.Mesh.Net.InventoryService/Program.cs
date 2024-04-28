@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using System.Text.Json.Serialization;
 using Ardalis.ListStartupServices;
-using Clean.Architecture.Infrastructure.Data;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using MediatR;
@@ -11,6 +10,7 @@ using verse.Mesh.Net.Core.CartAggregate;
 using verse.Mesh.Net.Core.Shared;
 using verse.Mesh.Net.Core.Shared.Behavior;
 using verse.Mesh.Net.Infrastructure;
+using verse.Mesh.Net.Infrastructure.Data;
 using verse.Mesh.Net.Infrastructure.Data.MemCache;
 using verse.Mesh.Net.InventoryService.Carts;
 using verse.Mesh.Net.InventoryService.Health;
@@ -122,7 +122,11 @@ void ConfigureMediatR()
 [JsonSerializable(typeof(CartItemDTO))]
 [JsonSerializable(typeof(ProductDTO))]
 [JsonSerializable(typeof(GetCartByUserQuery))]
-internal partial class AppJsonSerializerContext : JsonSerializerContext
-{
+internal partial class AppJsonSerializerContext : JsonSerializerContext { }
 
+// Make the implicit Program.cs class public, so integration tests can reference the
+// correct assembly for host building
+namespace verse.Mesh.Net.InventoryService
+{
+  public partial class Program { }
 }

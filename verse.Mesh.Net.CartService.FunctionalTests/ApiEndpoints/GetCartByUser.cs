@@ -1,15 +1,15 @@
 ﻿using Ardalis.HttpClientTestExtensions;
 using verse.Mesh.Net.CartService.Queries;
 
-namespace verse.Mesh.Net.FunctionalTests.CartService;
+namespace verse.Mesh.Net.CartService.FuctionalTests.ApiEndpoints;
 
-public class CartServiceTests
+public class GetCartByUser
 {
   private readonly HttpClient _client;
 
-  public CartServiceTests()
+  public GetCartByUser()
   {
-    var factory = new CustomWebApplicationFactory<Net.CartService.Program>();
+    var factory = new CustomWebApplicationFactory<Program>();
 
     this._client = factory.CreateClient();
   }
@@ -18,7 +18,7 @@ public class CartServiceTests
   public void Setup() { }
 
   [Test]
-  public async Task GetCartByUser_NonExisting_ReturnsNull()
+  public async Task GivenExisting_ReturnsSuccess()
   {
     await Task.CompletedTask;
     //var seededUserId = Guid.NewGuid();
@@ -31,7 +31,7 @@ public class CartServiceTests
   }
 
   [Test]
-  public async Task ReturnsNotFoundGivenId1000()
+  public async Task GivenNonExisting_ReturnsNotFound()
   {
     var userId = Guid.NewGuid();
     var route = GetCartByUserRequest.BuildRoute(userId.ToString());

@@ -64,8 +64,6 @@ app.UseFastEndpoints()
 
 app.UseHttpsRedirection();
 
-SeedDatabase(app);
-
 //var sampleTodos = new Todo[] {
 //    new(1, "Walk the dog"),
 //    new(2, "Do the dishes", DateOnly.FromDateTime(DateTime.Now)),
@@ -115,7 +113,11 @@ void ConfigureMediatR()
 }
 
 [JsonSerializable(typeof(ErrorResponse))]
-internal partial class AppJsonSerializerContext : JsonSerializerContext
-{
+internal partial class AppJsonSerializerContext : JsonSerializerContext { }
 
+// Make the implicit Program.cs class public, so integration tests can reference the
+// correct assembly for host building
+namespace verse.Mesh.Net.PaymentService
+{
+  public partial class Program { }
 }
