@@ -10,13 +10,13 @@
     <Folder Include="ProductAggregate\Events\" />
     <Folder Include="ProductAggregate\Handlers\" />
     <Folder Include="ProductAggregate\Specifications\" />
-    <Folder Include="CartAggregate\Specifications\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Ardalis.GuardClauses" Version="4.5.0" />
+    <PackageReference Include="Ardalis.Specification" Version="8.0.0" />
     <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
   </ItemGroup>

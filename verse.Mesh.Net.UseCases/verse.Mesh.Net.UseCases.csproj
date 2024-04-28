@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\verse.Mesh.Net.Core\verse.Mesh.Net.Core.csproj" />
+    <ProjectReference Include="..\verse.Mesh.Net.Infrastructure\verse.Mesh.Net.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
