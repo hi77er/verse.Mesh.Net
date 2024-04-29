@@ -2,9 +2,9 @@
 using verse.Mesh.Net.CartService.FunctionalTests.Base;
 using verse.Mesh.Net.CartService.Queries;
 
-namespace verse.Mesh.Net.CartService.FuctionalTests.Queries;
+namespace verse.Mesh.Net.CartService.FunctionalTests.Commands;
 
-public class GetCartByUser : BaseFixture
+public class CreateCart : BaseFixture
 {
   [SetUp]
   public void Setup() { }

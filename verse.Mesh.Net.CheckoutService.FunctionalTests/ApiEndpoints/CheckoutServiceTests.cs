@@ -1,6 +1,8 @@
-﻿namespace verse.Mesh.Net.CheckoutService.FuctionalTests.ApiEndpoints;
+﻿using verse.Mesh.Net.CheckoutService.FunctionalTests.Base;
 
-public class CheckoutServiceTests
+namespace verse.Mesh.Net.CheckoutService.FuctionalTests.ApiEndpoints;
+
+public class CheckoutServiceTests : BaseFixture
 {
   [SetUp]
   public void Setup()

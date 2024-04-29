@@ -53,7 +53,7 @@ public class CartUseCasesTests
   public async Task CreateCart_Success()
   {
     var cToken = CancellationToken.None;
-    var command = new CreateCartCommand(_testUserId, new List<CartItemDTO>() { });
+    var command = new CreateCartCommand(_testUserId, new List<CreateCartItemDTO>() { });
     var commandResult = await _createCartHandler.Handle(command, cToken);
 
     Assert.IsNotNull(commandResult?.Value);

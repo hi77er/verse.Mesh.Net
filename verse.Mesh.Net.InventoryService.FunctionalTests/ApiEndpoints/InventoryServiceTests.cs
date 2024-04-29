@@ -1,16 +1,10 @@
 ﻿using FastEndpoints;
+using verse.Mesh.Net.InventoryService.FunctionalTests.Base;
 
 namespace verse.Mesh.Net.InventoryService.FuctionalTests.ApiEndpoints;
 
-public class InventoryServiceTests
+public class InventoryServiceTests : BaseFixture
 {
-  //private readonly HttpClient _client;
-
-  //public InventoryServiceTests(CustomWebApplicationFactory<Net.InventoryService.Program> factory)
-  //{
-  //  _client = factory.CreateClient();
-  //}
-
   [SetUp]
   public void Setup() { }
 
@@ -18,11 +12,5 @@ public class InventoryServiceTests
   public void Test1()
   {
     Assert.Pass();
-  }
-
-  [OneTimeTearDown]
-  public void Cleanup()
-  {
-    //_client?.Dispose();
   }
 }

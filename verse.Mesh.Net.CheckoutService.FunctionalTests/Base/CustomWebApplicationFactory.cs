@@ -5,7 +5,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using verse.Mesh.Net.Infrastructure.Data.MemCache;
 
-namespace verse.Mesh.Net.ShippingService.FunctionalTests;
+namespace verse.Mesh.Net.CheckoutService.FunctionalTests.Base;
 
 public class CustomWebApplicationFactory<TProgram>
   : WebApplicationFactory<TProgram>
