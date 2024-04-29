@@ -1,6 +1,7 @@
 ﻿using Ardalis.Result;
 using FastEndpoints;
 using MediatR;
+using verse.Mesh.Net.CartService.Commands;
 using verse.Mesh.Net.CartService.Models;
 using verse.Mesh.Net.UseCases.Carts;
 using verse.Mesh.Net.UseCases.Carts.Get;
@@ -16,6 +17,15 @@ public class GetByUser(IMediator _mediator) : Endpoint<GetCartByUserRequest, Car
   {
     Get(GetCartByUserRequest.Route);
     AllowAnonymous();
+    Summary(s =>
+    {
+      // XML Docs are used by default but are overridden by these properties:
+      //s.UserId = "Create a new Cart.";
+      s.ExampleRequest = new GetCartByUserRequest()
+      {
+        UserId = Guid.NewGuid(),
+      };
+    });
   }
 
   public override async Task HandleAsync(

@@ -1,7 +1,7 @@
 ﻿using Ardalis.HttpClientTestExtensions;
 using verse.Mesh.Net.CartService.Queries;
 
-namespace verse.Mesh.Net.CartService.FuctionalTests.ApiEndpoints;
+namespace verse.Mesh.Net.CartService.FuctionalTests.Queries;
 
 public class GetCartByUser
 {

@@ -1,3 +1,3 @@
 ﻿namespace verse.Mesh.Net.CartService.Models;
 
-public record CartItemRecord(Guid id, ProductRecord product);
+public record CartItemRecord(Guid Id, ProductRecord Product);

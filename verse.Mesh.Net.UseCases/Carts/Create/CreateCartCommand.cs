@@ -8,4 +8,4 @@ namespace verse.Mesh.Net.UseCases.Carts.Create;
 /// </summary>
 /// <param name="UserId"></param>
 /// <param name="Items"></param>
-public record CreateCartCommand(Guid UserId, IEnumerable<CartItemDTO> Items) : ICommand<Result<Guid>>;
+public record CreateCartCommand(Guid UserId, IEnumerable<CreateCartItemDTO> Items) : ICommand<Result<Guid>>;

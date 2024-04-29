@@ -4,8 +4,6 @@ using verse.Mesh.Net.Core.CartAggregate;
 using verse.Mesh.Net.Core.ProductAggregate;
 using verse.Mesh.Net.Core.Shared;
 using verse.Mesh.Net.Infrastructure.Data.MemCache;
-using verse.Mesh.Net.UseCases.Carts.Get;
-using verse.Mesh.Net.UseCases.Products;
 
 namespace verse.Mesh.Net.UseCases.Carts.Create;
 
@@ -17,15 +15,11 @@ public class CreateCartHandler(IDistributedCacheAdapter _cacheService) : IComman
       .Items
       .Select(item =>
       {
-        var product = new Product(
-          item.Product.Name,
-          item.Product.Price,
-          item.Product.Description)
-        {
-          Id = item.Product.Id,
-        };
+        // TODO:
+        // Get the actual product by item.ProductId from the DB/cache here.
+        var product = new Product("", 0.0m) { Id = item.ProductId };
 
-        return new CartItem(product, 2);
+        return new CartItem(product, item.Quantity);
       });
 
     var cartId = Guid.NewGuid();
@@ -33,7 +27,7 @@ public class CreateCartHandler(IDistributedCacheAdapter _cacheService) : IComman
     {
       Id = cartId,
     };
-    
+
     // Saving it with a key = userId in order to e able to "query" it by userId later
     var success = await _cacheService.SetItemAsync<Cart>(request.UserId.ToString(), entity);
 
