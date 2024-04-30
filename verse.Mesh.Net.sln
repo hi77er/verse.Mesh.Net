@@ -47,17 +47,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.UnitTests", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.IntegrationTests", "verse.Mesh.Net.IntegrationTests\verse.Mesh.Net.IntegrationTests.csproj", "{ED5A6224-1AE6-430D-A430-AD733043645B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "verse.Mesh.Net.CartService.FunctionalTests", "verse.Mesh.Net.CartService.FunctionalTests\verse.Mesh.Net.CartService.FunctionalTests.csproj", "{AFAD1B79-D4BB-46BC-A2D0-A4A8AF39276E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.CartService.FunctionalTests", "verse.Mesh.Net.CartService.FunctionalTests\verse.Mesh.Net.CartService.FunctionalTests.csproj", "{AFAD1B79-D4BB-46BC-A2D0-A4A8AF39276E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "verse.Mesh.Net.InventoryService.FunctionalTests", "verse.Mesh.Net.InventoryService.FunctionalTests\verse.Mesh.Net.InventoryService.FunctionalTests.csproj", "{3787A95A-DDCC-455C-BD99-94A65CCBF109}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.InventoryService.FunctionalTests", "verse.Mesh.Net.InventoryService.FunctionalTests\verse.Mesh.Net.InventoryService.FunctionalTests.csproj", "{3787A95A-DDCC-455C-BD99-94A65CCBF109}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "verse.Mesh.Net.ShippingService.FunctionalTests", "verse.Mesh.Net.ShippingService.FunctionalTests\verse.Mesh.Net.ShippingService.FunctionalTests.csproj", "{C051A476-F637-465B-80DE-F0D72F4E8B89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.ShippingService.FunctionalTests", "verse.Mesh.Net.ShippingService.FunctionalTests\verse.Mesh.Net.ShippingService.FunctionalTests.csproj", "{C051A476-F637-465B-80DE-F0D72F4E8B89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "verse.Mesh.Net.CheckoutService.FunctionalTests", "verse.Mesh.Net.CheckoutService.FunctionalTests\verse.Mesh.Net.CheckoutService.FunctionalTests.csproj", "{962F915D-A361-48F1-9040-7C11DB9FAB3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.CheckoutService.FunctionalTests", "verse.Mesh.Net.CheckoutService.FunctionalTests\verse.Mesh.Net.CheckoutService.FunctionalTests.csproj", "{962F915D-A361-48F1-9040-7C11DB9FAB3F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "verse.Mesh.Net.RecommendationService.FunctionalTests", "verse.Mesh.Net.RecommendationService.FunctionalTests\verse.Mesh.Net.RecommendationService.FunctionalTests.csproj", "{FFCE39E0-E151-4FF2-B082-6F2944D94425}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.RecommendationService.FunctionalTests", "verse.Mesh.Net.RecommendationService.FunctionalTests\verse.Mesh.Net.RecommendationService.FunctionalTests.csproj", "{FFCE39E0-E151-4FF2-B082-6F2944D94425}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "verse.Mesh.Net.PaymentService.FunctionalTests", "verse.Mesh.Net.PaymentService.FunctionalTests\verse.Mesh.Net.PaymentService.FunctionalTests.csproj", "{F95FBD17-4C76-471E-B143-AFD392740B1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "verse.Mesh.Net.PaymentService.FunctionalTests", "verse.Mesh.Net.PaymentService.FunctionalTests\verse.Mesh.Net.PaymentService.FunctionalTests.csproj", "{F95FBD17-4C76-471E-B143-AFD392740B1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,7 +1,5 @@
 ﻿using Ardalis.Result;
-using FastEndpoints;
 using MediatR;
-using verse.Mesh.Net.CartService.Commands;
 using verse.Mesh.Net.CartService.Models;
 using verse.Mesh.Net.UseCases.Carts;
 using verse.Mesh.Net.UseCases.Carts.Get;
@@ -11,55 +9,48 @@ namespace verse.Mesh.Net.CartService.Queries;
 /// <summary>
 /// Get a cart by a given userId.
 /// </summary>
-public class GetByUser(IMediator _mediator) : Endpoint<GetCartByUserRequest, CartRecord>
+public static class GetByUser
 {
-  public override void Configure()
+  public static WebApplication MapGetByUserEndpoint(this WebApplication app)
   {
-    Get(GetCartByUserRequest.Route);
-    AllowAnonymous();
-    Summary(s =>
+    app.MapGet("/{userId}", async (Guid userId) =>
     {
-      // XML Docs are used by default but are overridden by these properties:
-      //s.UserId = "Create a new Cart.";
-      s.ExampleRequest = new GetCartByUserRequest()
+      var mediator = app.Services.GetRequiredService<IMediator>();
+
+      var query = new GetCartByUserQuery(userId);
+
+      var result = await mediator.Send(query);
+
+      if (result.Status == ResultStatus.NotFound)
       {
-        UserId = Guid.NewGuid(),
-      };
+        return Results.NotFound();
+      }
+
+      if (result.IsSuccess)
+      {
+        var response = Map(result);
+
+        return Results.Ok(response);
+      }
+
+      return Results.Problem();
     });
-  }
 
-  public override async Task HandleAsync(
-    GetCartByUserRequest request,
-    CancellationToken cancellationToken)
-  {
-    var query = new GetCartByUserQuery(request.UserId);
-
-    var result = await _mediator.Send(query, cancellationToken);
-
-    if (result.Status == ResultStatus.NotFound)
-    {
-      await SendNotFoundAsync(cancellationToken);
-      return;
-    }
-
-    if (result.IsSuccess)
-    {
-      var response = Map(result);
-
-      Response = response;
-    }
+    return app;
   }
 
   private static CartRecord Map(Result<CartDTO> result)
   {
-    var cartItemRecords = result.Value.CartItems
-            .Select(x =>
-            {
-              var productRecord = new ProductRecord(
-                x.Product.Id, x.Product.Name, x.Product.Price, x.Product.Description);
+    var cartItemRecords = result
+      .Value
+      .CartItems
+      .Select(x =>
+      {
+        var productRecord = new ProductRecord(
+          x.Product.Id, x.Product.Name, x.Product.Price, x.Product.Description);
 
-              return new CartItemRecord(x.Id, productRecord);
-            });
+        return new CartItemRecord(x.Id, productRecord);
+      });
 
     var cartRecord = new CartRecord(result.Value.Id, result.Value.UserId, cartItemRecords);
 

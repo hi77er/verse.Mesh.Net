@@ -2,6 +2,8 @@
 
 public static class AppConstants
 {
+  public const string MEDIA_TYPE_STRING = "application/json";
+
   public const int DEFAULT_NAME_LENGTH = 100;
   public const int MEM_CACHE_DEFAULT_EXPIRES_MIN = 1440;
 

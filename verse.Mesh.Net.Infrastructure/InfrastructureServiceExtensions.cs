@@ -23,7 +23,7 @@ public static class InfrastructureServiceExtensions
     if (isDevelopmentEnv)
     {
       services.AddMemoryCache();
-      services.AddScoped<IDistributedCacheAdapter, MemoryCacheService>();
+      services.AddSingleton<IDistributedCacheAdapter, MemoryCacheService>();
     }
     else
     {
@@ -38,7 +38,7 @@ public static class InfrastructureServiceExtensions
         return ConnectionMultiplexer.Connect(connStr);
       });
 
-      services.AddScoped<IDistributedCacheAdapter, RedisCacheService>();
+      services.AddSingleton<IDistributedCacheAdapter, RedisCacheService>();
     }
 
     //string? connectionString = config.GetConnectionString("SqliteConnection");
@@ -52,7 +52,7 @@ public static class InfrastructureServiceExtensions
 
     //services.Configure<MailserverConfiguration>(config.GetSection("Mailserver"));
 
-    logger.LogInformation("{Project} services registered", "Infrastructure");
+    //logger.LogInformation("{Project} services registered", "Infrastructure");
 
     return services;
   }

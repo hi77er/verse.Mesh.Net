@@ -38,10 +38,10 @@ public class CustomWebApplicationFactory<TProgram>
       //// Ensure the database is created.
       //db.Database.EnsureCreated();
 
-      var cacheService = scopedServices.GetRequiredService<IDistributedCacheAdapter>();
-
+      var cacheService = scopedServices
+        .GetRequiredService<IDistributedCacheAdapter>();
       var logger = scopedServices
-          .GetRequiredService<ILogger<CustomWebApplicationFactory<TProgram>>>();
+        .GetRequiredService<ILogger<CustomWebApplicationFactory<TProgram>>>();
 
       try
       {

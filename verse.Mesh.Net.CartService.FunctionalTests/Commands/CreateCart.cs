@@ -1,6 +1,12 @@
-﻿using Ardalis.HttpClientTestExtensions;
+﻿using System.Text;
+using System.Text.Json;
+using Ardalis.HttpClientTestExtensions;
+using Microsoft.AspNetCore.Mvc;
+using verse.Mesh.Net.CartService.Commands;
 using verse.Mesh.Net.CartService.FunctionalTests.Base;
+using verse.Mesh.Net.CartService.Models;
 using verse.Mesh.Net.CartService.Queries;
+using verse.Mesh.Net.Infrastructure.Data.Config;
 
 namespace verse.Mesh.Net.CartService.FunctionalTests.Commands;
 
@@ -10,23 +16,34 @@ public class CreateCart : BaseFixture
   public void Setup() { }
 
   [Test]
-  public async Task GivenExisting_ReturnsSuccess()
+  public async Task ReturnsSuccess()
   {
-    await Task.CompletedTask;
-    //var seededUserId = Guid.NewGuid();
-    //var route = GetCartByUserRequest.BuildRoute(seededUserId.ToString());
-    //var result = await _client.GetAndDeserializeAsync<CartRecord>(route);
+    var createRoute = "/";
+    var seededUserId = Guid.NewGuid();
 
-    //Assert.That(result, Is.Not.Null);
-    //Assert.That(result.Id, Is.Not.Empty);
-    //Assert.That(result.UserId, Is.EqualTo(seededUserId));
+    var request = new CreateCartRequest(seededUserId, new List<CreateCartItemRecord>());
+    var serialized = JsonSerializer.Serialize(request);
+    var content = new StringContent(serialized, Encoding.UTF8, AppConstants.MEDIA_TYPE_STRING);
+
+    var createResult = await _client.PostAndDeserializeAsync<CreateCartResponse>(createRoute, content);
+
+    Assert.That(createResult, Is.Not.Null);
+    Assert.That(createResult.UserId, Is.Not.Empty);
+    Assert.That(createResult.UserId, Is.EqualTo(seededUserId));
+
+    var getRoute = $"/{createResult.UserId}";
+    var getResult = await _client.GetAndDeserializeAsync<Models.CartRecord?>(getRoute);
+
+    Assert.That(getResult, Is.Not.Null);
+    Assert.That(getResult.UserId, Is.Not.Empty);
+    Assert.That(getResult.UserId, Is.EqualTo(seededUserId));
   }
 
   [Test]
   public async Task GivenNonExisting_ReturnsNotFound()
   {
     var userId = Guid.NewGuid();
-    var route = GetCartByUserRequest.BuildRoute(userId.ToString());
+    var route = $"/{userId}";
 
     _ = await _client.GetAndEnsureNotFoundAsync(route);
   }

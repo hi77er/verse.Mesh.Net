@@ -29,8 +29,8 @@ public class CreateCartHandler(IDistributedCacheAdapter _cacheService) : IComman
     };
 
     // Saving it with a key = userId in order to e able to "query" it by userId later
-    var success = await _cacheService.SetItemAsync<Cart>(request.UserId.ToString(), entity);
+    var success = await _cacheService.SetItemAsync(request.UserId.ToString(), entity);
 
-    return cartId;
+    return request.UserId;
   }
 }

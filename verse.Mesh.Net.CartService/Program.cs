@@ -1,11 +1,12 @@
 ﻿using System.Reflection;
 using System.Text.Json.Serialization;
 using Ardalis.ListStartupServices;
-using FastEndpoints;
-using FastEndpoints.Swagger;
+using Ardalis.Result;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using Serilog.Extensions.Logging;
+using verse.Mesh.Net.CartService.Commands;
 using verse.Mesh.Net.CartService.Health;
 using verse.Mesh.Net.CartService.Models;
 using verse.Mesh.Net.CartService.Queries;
@@ -13,6 +14,8 @@ using verse.Mesh.Net.Core.CartAggregate;
 using verse.Mesh.Net.Core.Shared;
 using verse.Mesh.Net.Core.Shared.Behavior;
 using verse.Mesh.Net.Infrastructure;
+using verse.Mesh.Net.Infrastructure.Data;
+using verse.Mesh.Net.Infrastructure.Data.MemCache;
 using verse.Mesh.Net.UseCases.Carts;
 using verse.Mesh.Net.UseCases.Carts.Get;
 using verse.Mesh.Net.UseCases.Products;
@@ -23,9 +26,12 @@ var logger = Log.Logger = new LoggerConfiguration()
   .WriteTo.Console()
   .CreateLogger();
 
-logger.Information("Starting Inventory Service host");
-
 var builder = WebApplication.CreateSlimBuilder(args);
+
+builder.Services.AddLogging(loggingBuilder =>
+{
+  loggingBuilder.AddConsole(); // Add console logging provider (example)
+});
 
 builder.Host.UseSerilog((_, config) => config.ReadFrom.Configuration(builder.Configuration));
 var microsoftLogger = new SerilogLoggerFactory(logger).CreateLogger<Program>();
@@ -36,12 +42,6 @@ builder.Services
     options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
   });
 
-builder.Services
-  .AddFastEndpoints()
-  .SwaggerDocument(o =>
-  {
-    o.ShortSchemaNames = true;
-  });
 
 ConfigureMediatR();
 
@@ -52,21 +52,22 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-  app.UseDeveloperExceptionPage();
-  app.UseShowAllServicesMiddleware(); // see https://github.com/ardalis/AspNetCoreStartupServices
+  //app.UseDeveloperExceptionPage();
+  //app.UseShowAllServicesMiddleware(); // see https://github.com/ardalis/AspNetCoreStartupServices
 
   SeedDatabase(app);
 }
 else
 {
-  app.UseDefaultExceptionHandler(); // from FastEndpoints
-  app.UseHsts();
+  //app.UseDefaultExceptionHandler(); // from FastEndpoints
+  //app.UseHsts();
 }
 
-app.UseFastEndpoints()
-    .UseSwaggerGen(); // Includes AddFileServer and static files middleware
-
 app.UseHttpsRedirection();
+
+app.MapHealthEndpoint();
+app.MapGetByUserEndpoint();
+app.MapCreateCartEndpoint();
 
 //var sampleTodos = new Todo[] {
 //    new(1, "Walk the dog"),
@@ -87,21 +88,20 @@ app.Run();
 
 static void SeedDatabase(WebApplication app)
 {
-  //using var scope = app.Services.CreateScope();
-  //var services = scope.ServiceProvider;
+  using var scope = app.Services.CreateScope();
+  var services = scope.ServiceProvider;
 
-  //try
-  //{
-  //  var context = services.GetRequiredService<AppDbContext>();
-  //  //          context.Database.Migrate();
-  //  context.Database.EnsureCreated();
-  //  SeedData.Initialize(services);
-  //}
-  //catch (Exception ex)
-  //{
-  //  var logger = services.GetRequiredService<ILogger<Program>>();
-  //  logger.LogError(ex, "An error occurred seeding the DB. {exceptionMessage}", ex.Message);
-  //}
+  try
+  {
+    var service = services.GetRequiredService<IDistributedCacheAdapter>();
+    var dataSeeder = new RedisDataSeeder(service);
+    dataSeeder.Seed();
+  }
+  catch (Exception ex)
+  {
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "An error occurred seeding the DB. {exceptionMessage}", ex.Message);
+  }
 }
 
 void ConfigureMediatR()
@@ -112,21 +112,25 @@ void ConfigureMediatR()
     Assembly.GetAssembly(typeof(CartDTO)) // UseCases
   };
   builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(mediatRAssemblies!));
-  builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+  //builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
   builder.Services.AddScoped<IDomainEventDispatcher, MediatRDomainEventDispatcher>();
 }
 
-[JsonSerializable(typeof(ErrorResponse))]
-[JsonSerializable(typeof(GetCartByUserRequest))]
 [JsonSerializable(typeof(GetHealthRequest))]
-[JsonSerializable(typeof(CartRecord))]
-[JsonSerializable(typeof(CartItemRecord))]
-[JsonSerializable(typeof(ProductRecord))]
+[JsonSerializable(typeof(GetCartByUserRequest))]
+[JsonSerializable(typeof(GetCartByUserQuery))]
 [JsonSerializable(typeof(CartDTO))]
 [JsonSerializable(typeof(CartItemDTO))]
 [JsonSerializable(typeof(ProductDTO))]
-[JsonSerializable(typeof(GetCartByUserQuery))]
-internal partial class AppJsonSerializerContext : JsonSerializerContext { }
+[JsonSerializable(typeof(CreateCartRequest))]
+[JsonSerializable(typeof(CreateCartResponse))]
+[JsonSerializable(typeof(CreateCartRecord))]
+[JsonSerializable(typeof(CartRecord))]
+[JsonSerializable(typeof(CartItemRecord))]
+[JsonSerializable(typeof(List<CartItemRecord>))]
+[JsonSerializable(typeof(IEnumerable<CartItemRecord>))]
+[JsonSerializable(typeof(ProductRecord))]
+public partial class AppJsonSerializerContext : JsonSerializerContext { }
 
 // Make the implicit Program.cs class public, so integration tests can reference the
 // correct assembly for host building

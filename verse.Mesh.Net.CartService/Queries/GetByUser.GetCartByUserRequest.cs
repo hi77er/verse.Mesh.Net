@@ -1,9 +1,9 @@
-﻿namespace verse.Mesh.Net.CartService.Queries;
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace verse.Mesh.Net.CartService.Queries;
 
 public class GetCartByUserRequest
 {
-  public const string Route = "/{userId}";
-  public static string BuildRoute(string userId) => Route.Replace("{userId}", userId);
-
+  [FromRoute]
   public Guid UserId { get; set; }
 }
