@@ -1,27 +1,17 @@
-﻿using FastEndpoints;
-
-namespace verse.Mesh.Net.InventoryService.Health;
+﻿namespace verse.Mesh.Net.InventoryService.Health;
 
 /// <summary>
 /// An epoint representing a health status check.
 /// </summary>
-public class GetHealth : Endpoint<GetHealthRequest, string>
+public static class GetHealth
 {
-  public override void Configure()
+  public static WebApplication MapHealthEndpoint(this WebApplication app)
   {
-    Get(GetHealthRequest.Route);
-    AllowAnonymous();
-  }
+    app.MapGet("/health", async () =>
+    {
+      return await Task.FromResult("Inventory Service is Alive!");
+    });
 
-  public override async Task HandleAsync(
-    GetHealthRequest request,
-    CancellationToken cancellationToken)
-  {
-    Response = $"{request.ServiceName} is Alive!";
-
-    await Task.CompletedTask;
-
-    return;
+    return app;
   }
 }
-

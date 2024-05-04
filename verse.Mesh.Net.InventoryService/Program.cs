@@ -1,22 +1,22 @@
 ﻿using System.Reflection;
 using System.Text.Json.Serialization;
-using Ardalis.ListStartupServices;
-using FastEndpoints;
-using FastEndpoints.Swagger;
+using FluentValidation;
 using MediatR;
 using Serilog;
 using Serilog.Extensions.Logging;
+using verse.Mesh.Net.CartService.Commands;
 using verse.Mesh.Net.Core.CartAggregate;
 using verse.Mesh.Net.Core.Shared;
 using verse.Mesh.Net.Core.Shared.Behavior;
 using verse.Mesh.Net.Infrastructure;
 using verse.Mesh.Net.Infrastructure.Data;
 using verse.Mesh.Net.Infrastructure.Data.MemCache;
-using verse.Mesh.Net.InventoryService.Carts;
+using verse.Mesh.Net.InventoryService.Products;
 using verse.Mesh.Net.InventoryService.Health;
 using verse.Mesh.Net.UseCases.Carts;
 using verse.Mesh.Net.UseCases.Carts.Get;
 using verse.Mesh.Net.UseCases.Products;
+using verse.Mesh.Net.UseCases.Products.Get;
 
 var logger = Log.Logger = new LoggerConfiguration()
   .Enrich.FromLogContext()
@@ -36,14 +36,8 @@ builder.Services
     options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
   });
 
-builder.Services
-  .AddFastEndpoints()
-  .SwaggerDocument(o =>
-  {
-    o.ShortSchemaNames = true;
-  });
-
 ConfigureMediatR();
+ConfigureValidation();
 
 var isDevelopmentEnv = builder.Environment.IsDevelopment();
 builder.Services.AddInfrastructureServices(builder.Configuration, microsoftLogger, isDevelopmentEnv);
@@ -52,36 +46,19 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-  app.UseDeveloperExceptionPage();
-  app.UseShowAllServicesMiddleware(); // see https://github.com/ardalis/AspNetCoreStartupServices
-
   SeedDatabase(app);
 }
 else
 {
-  app.UseDefaultExceptionHandler(); // from FastEndpoints
-  app.UseHsts();
+  //app.UseHsts();
 }
-
-app.UseFastEndpoints()
-    .UseSwaggerGen(); // Includes AddFileServer and static files middleware
 
 app.UseHttpsRedirection();
 
-//var sampleTodos = new Todo[] {
-//    new(1, "Walk the dog"),
-//    new(2, "Do the dishes", DateOnly.FromDateTime(DateTime.Now)),
-//    new(3, "Do the laundry", DateOnly.FromDateTime(DateTime.Now.AddDays(1))),
-//    new(4, "Clean the bathroom"),
-//    new(5, "Clean the car", DateOnly.FromDateTime(DateTime.Now.AddDays(2)))
-//};
+app.MapHealthEndpoint();
+app.MapGetByUserEndpoint();
 
-//var todosApi = app.MapGroup("/todos");
-//todosApi.MapGet("/", () => sampleTodos);
-//todosApi.MapGet("/{id}", (int id) =>
-//    sampleTodos.FirstOrDefault(a => a.Id == id) is { } todo
-//        ? Results.Ok(todo)
-//        : Results.NotFound());
+
 
 app.Run();
 
@@ -111,11 +88,16 @@ void ConfigureMediatR()
     Assembly.GetAssembly(typeof(CartDTO)) // UseCases
   };
   builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(mediatRAssemblies!));
-  builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+  builder.Services.AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
   builder.Services.AddScoped<IDomainEventDispatcher, MediatRDomainEventDispatcher>();
 }
 
-[JsonSerializable(typeof(ErrorResponse))]
+void ConfigureValidation()
+{
+  builder.Services.AddSingleton<IValidator<GetProductByIdRequest>, GetProductByIdValidator>();
+}
+
+[JsonSerializable(typeof(GetProductByIdQuery))]
 [JsonSerializable(typeof(GetHealthRequest))]
 [JsonSerializable(typeof(ProductRecord))]
 [JsonSerializable(typeof(CartDTO))]

@@ -1,6 +1,5 @@
-﻿using Ardalis.Result;
+﻿using FluentValidation;
 using MediatR;
-using verse.Mesh.Net.CartService.Models;
 using verse.Mesh.Net.UseCases.Carts;
 using verse.Mesh.Net.UseCases.Carts.Create;
 
@@ -17,8 +16,14 @@ public static class Create
 
   public static WebApplication MapCreateCartEndpoint(this WebApplication app)
   {
-    app.MapPost("/", async (CreateCartRequest request) =>
+    app.MapPost("/", async (CreateCartRequest request, IValidator<CreateCartRequest> validator) =>
     {
+      var validationResult = validator.Validate(request);
+      if (!validationResult.IsValid)
+      {
+        return Results.BadRequest(validationResult.Errors.Select(e => e.ErrorMessage));
+      }
+
       var mediator = app.Services.GetRequiredService<IMediator>();
 
       var cartItemDtos = request

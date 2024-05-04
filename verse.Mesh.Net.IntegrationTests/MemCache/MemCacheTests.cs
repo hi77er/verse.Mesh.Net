@@ -1,11 +1,6 @@
-﻿using System.Runtime.CompilerServices;
-using Ardalis.GuardClauses;
-using FastEndpoints;
-using Microsoft.Extensions.Caching.Memory;
+﻿using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
-using StackExchange.Redis;
 using verse.Mesh.Net.Core.ProductAggregate;
-using verse.Mesh.Net.Infrastructure.Data.Config;
 using verse.Mesh.Net.Infrastructure.Data.MemCache;
 
 namespace verse.Mesh.Net.IntegrationTests.MemCache;

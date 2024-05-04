@@ -37,6 +37,9 @@ public class RedisDataSeeder
     Cart1.Id = Guid.NewGuid();
     Cart2.Id = Guid.NewGuid();
 
+    this._cacheService.SetItemAsync(Product1.Id.ToString(), Product1, 10);
+    this._cacheService.SetItemAsync(Product2.Id.ToString(), Product2, 10);
+    this._cacheService.SetItemAsync(Product3.Id.ToString(), Product3, 10);
     this._cacheService.SetItemAsync(Cart1.UserId.ToString(), Cart1, 10);
     this._cacheService.SetItemAsync(Cart2.UserId.ToString(), Cart2, 10);
   }

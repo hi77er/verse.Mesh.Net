@@ -1,5 +1,13 @@
-﻿namespace verse.Mesh.Net.CartService.Commands;
+﻿using FluentValidation;
 
-public class CreateCartValidator
+namespace verse.Mesh.Net.CartService.Commands;
+
+public class CreateCartValidator : AbstractValidator<CreateCartRequest>
 {
+  public CreateCartValidator()
+  {
+    RuleFor(x => x.UserId)
+        .NotEmpty()
+        .WithMessage("UserId cannot be empty.");
+  }
 }

@@ -47,4 +47,16 @@ public class CreateCart : BaseFixture
 
     _ = await _client.GetAndEnsureNotFoundAsync(route);
   }
+
+  [Test]
+  public async Task GivenEmpty_BadRequest()
+  {
+    var createRoute = "/";
+
+    var request = new CreateCartRequest(Guid.Empty, new List<CreateCartItemRecord>());
+    var serialized = JsonSerializer.Serialize(request);
+    var content = new StringContent(serialized, Encoding.UTF8, AppConstants.MEDIA_TYPE_STRING);
+
+    _ = await _client.PostAndEnsureBadRequestAsync(createRoute, content);
+  }
 }

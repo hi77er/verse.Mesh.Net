@@ -1,51 +1,57 @@
 ﻿using Ardalis.Result;
-using FastEndpoints;
+using FluentValidation;
 using MediatR;
-using verse.Mesh.Net.UseCases.Carts.Get;
 using verse.Mesh.Net.UseCases.Products;
 using verse.Mesh.Net.UseCases.Products.Get;
 
-namespace verse.Mesh.Net.InventoryService.Carts;
+namespace verse.Mesh.Net.InventoryService.Products;
 
 /// <summary>
 /// Get a product by a given id.
 /// </summary>
-public class GetById(IMediator _mediator) : Endpoint<GetProductByIdRequest, ProductRecord>
+public static class GetById
 {
-  public override void Configure()
+  public static WebApplication MapGetByUserEndpoint(this WebApplication app)
   {
-    Get(GetProductByIdRequest.Route);
-    AllowAnonymous();
-  }
-
-  public override async Task HandleAsync(
-    GetProductByIdRequest request,
-    CancellationToken cancellationToken)
-  {
-    var query = new GetProductByIdQuery(request.Id);
-
-    var result = await _mediator.Send(query, cancellationToken);
-
-    if (result.Status == ResultStatus.NotFound)
+    app.MapGet("/{id}", async (Guid id, IValidator<GetProductByIdRequest> validator) =>
     {
-      await SendNotFoundAsync(cancellationToken);
-      return;
-    }
+      var request = new GetProductByIdRequest { Id = id };
+      var validationResult = validator.Validate(request);
+      if (!validationResult.IsValid)
+      {
+        return Results.BadRequest(validationResult.Errors.Select(e => e.ErrorMessage));
+      }
 
-    if (result.IsSuccess)
-    {
-      var response = Map(result);
+      var mediator = app.Services.GetRequiredService<IMediator>();
 
-      Response = response;
-    }
+      var query = new GetProductByIdQuery(id);
+
+      var result = await mediator.Send(query);
+
+      if (result.Status == ResultStatus.NotFound)
+      {
+        return Results.NotFound();
+      }
+
+      if (result.IsSuccess)
+      {
+        var response = Map(result);
+
+        return Results.Ok(response);
+      }
+
+      return Results.Problem();
+    });
+
+    return app;
   }
 
   private static ProductRecord Map(Result<ProductDTO> result)
   {
     var productRecord = new ProductRecord(
-                result.Value.Id, 
-                result.Value.Name, 
-                result.Value.Price, 
+                result.Value.Id,
+                result.Value.Name,
+                result.Value.Price,
                 result.Value.Description);
 
     return productRecord;

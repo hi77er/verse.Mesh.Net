@@ -1,17 +1,14 @@
-﻿using FastEndpoints;
-using FluentValidation;
+﻿using FluentValidation;
+using verse.Mesh.Net.InventoryService.Products;
 
-namespace verse.Mesh.Net.InventoryService.Carts;
+namespace verse.Mesh.Net.CartService.Commands;
 
-/// <summary>
-/// See: https://fast-endpoints.com/docs/validation
-/// </summary>
-public class GetProductByIdValidator : Validator<GetProductByIdRequest>
+public class GetProductByIdValidator : AbstractValidator<GetProductByIdRequest>
 {
   public GetProductByIdValidator()
   {
     RuleFor(x => x.Id)
-     .NotNull()
-     .NotEmpty();
+        .NotEmpty()
+        .WithMessage("Please provide a valid product ID");
   }
 }
