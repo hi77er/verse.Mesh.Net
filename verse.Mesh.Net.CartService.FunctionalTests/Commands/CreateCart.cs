@@ -4,7 +4,7 @@ using Ardalis.HttpClientTestExtensions;
 using Microsoft.AspNetCore.Mvc;
 using verse.Mesh.Net.CartService.Commands;
 using verse.Mesh.Net.CartService.FunctionalTests.Base;
-using verse.Mesh.Net.CartService.Models;
+using verse.Mesh.Net.Models;
 using verse.Mesh.Net.CartService.Queries;
 using verse.Mesh.Net.Infrastructure.Data.Config;
 

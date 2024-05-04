@@ -1,7 +1,7 @@
 ﻿using Ardalis.HttpClientTestExtensions;
 using verse.Mesh.Net.Infrastructure.Data;
-using verse.Mesh.Net.InventoryService.Products;
 using verse.Mesh.Net.InventoryService.FunctionalTests.Base;
+using verse.Mesh.Net.Models;
 
 namespace verse.Mesh.Net.InventoryService.FuctionalTests.Queries;
 

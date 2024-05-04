@@ -1,6 +1,6 @@
 ﻿using Ardalis.Result;
 using MediatR;
-using verse.Mesh.Net.CartService.Models;
+using verse.Mesh.Net.Models;
 using verse.Mesh.Net.UseCases.Carts;
 using verse.Mesh.Net.UseCases.Carts.Get;
 

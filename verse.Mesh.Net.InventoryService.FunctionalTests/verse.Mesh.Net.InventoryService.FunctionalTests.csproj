@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\verse.Mesh.Net.Clients\verse.Mesh.Net.Clients.csproj" />
     <ProjectReference Include="..\verse.Mesh.Net.Infrastructure\verse.Mesh.Net.Infrastructure.csproj" />
     <ProjectReference Include="..\verse.Mesh.Net.InventoryService\verse.Mesh.Net.InventoryService.csproj" />
     <ProjectReference Include="..\verse.Mesh.Net.UseCases\verse.Mesh.Net.UseCases.csproj" />
