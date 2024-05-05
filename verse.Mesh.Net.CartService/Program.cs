@@ -6,7 +6,7 @@ using Serilog;
 using Serilog.Extensions.Logging;
 using verse.Mesh.Net.CartService.Commands;
 using verse.Mesh.Net.CartService.Health;
-using verse.Mesh.Net.Models;
+using verse.Mesh.Net.Core.Models;
 using verse.Mesh.Net.CartService.Queries;
 using verse.Mesh.Net.Core.CartAggregate;
 using verse.Mesh.Net.Core.Shared;
@@ -17,6 +17,7 @@ using verse.Mesh.Net.Infrastructure.Data.MemCache;
 using verse.Mesh.Net.UseCases.Carts;
 using verse.Mesh.Net.UseCases.Carts.Get;
 using verse.Mesh.Net.UseCases.Products;
+using verse.Mesh.Net.Infrastructure.Data.Config;
 
 
 var logger = Log.Logger = new LoggerConfiguration()

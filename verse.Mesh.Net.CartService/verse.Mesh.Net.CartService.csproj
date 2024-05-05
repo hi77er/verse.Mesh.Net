@@ -23,7 +23,6 @@
   <ItemGroup>
     <ProjectReference Include="..\verse.Mesh.Net.Core\verse.Mesh.Net.Core.csproj" />
     <ProjectReference Include="..\verse.Mesh.Net.Infrastructure\verse.Mesh.Net.Infrastructure.csproj" />
-    <ProjectReference Include="..\verse.Mesh.Net.Models\verse.Mesh.Net.Models.csproj" />
     <ProjectReference Include="..\verse.Mesh.Net.UseCases\verse.Mesh.Net.UseCases.csproj" />
   </ItemGroup>
 

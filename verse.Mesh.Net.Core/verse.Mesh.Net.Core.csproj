@@ -10,8 +10,6 @@
     <Folder Include="ProductAggregate\Events\" />
     <Folder Include="ProductAggregate\Handlers\" />
     <Folder Include="ProductAggregate\Specifications\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>

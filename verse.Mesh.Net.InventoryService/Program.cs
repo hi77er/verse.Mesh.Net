@@ -17,7 +17,8 @@ using verse.Mesh.Net.UseCases.Carts;
 using verse.Mesh.Net.UseCases.Carts.Get;
 using verse.Mesh.Net.UseCases.Products;
 using verse.Mesh.Net.UseCases.Products.Get;
-using verse.Mesh.Net.Models;
+using verse.Mesh.Net.Core.Models;
+using verse.Mesh.Net.Infrastructure.Data.Config;
 
 var logger = Log.Logger = new LoggerConfiguration()
   .Enrich.FromLogContext()

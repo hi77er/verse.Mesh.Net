@@ -12,10 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\verse.Mesh.Net.Clients\verse.Mesh.Net.Clients.csproj" />
     <ProjectReference Include="..\verse.Mesh.Net.Core\verse.Mesh.Net.Core.csproj" />
     <ProjectReference Include="..\verse.Mesh.Net.Infrastructure\verse.Mesh.Net.Infrastructure.csproj" />
-    <ProjectReference Include="..\verse.Mesh.Net.Models\verse.Mesh.Net.Models.csproj" />
   </ItemGroup>
 
 </Project>

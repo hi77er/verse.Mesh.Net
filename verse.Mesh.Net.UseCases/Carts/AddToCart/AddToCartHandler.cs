@@ -2,17 +2,18 @@
 using Ardalis.GuardClauses;
 using Ardalis.Result;
 using Ardalis.Specification;
-using verse.Mesh.Net.Clients.Facade;
+using verse.Mesh.Net.Infrastructure.Clients.Facade;
 using verse.Mesh.Net.Core.CartAggregate;
 using verse.Mesh.Net.Core.ProductAggregate;
 using verse.Mesh.Net.Core.Shared;
 using verse.Mesh.Net.Infrastructure.Data.MemCache;
-using verse.Mesh.Net.Models;
-using verse.Mesh.Net.UseCases.Products;
+using verse.Mesh.Net.Core.Models;
 
 namespace verse.Mesh.Net.UseCases.Carts.Create;
 
-public class AddToCartHandler(IDistributedCacheAdapter _cacheService, IInventoryService _inventoryService) : ICommandHandler<AddToCartCommand, Result<IEnumerable<Guid>>>
+public class AddToCartHandler(
+  IDistributedCacheAdapter _cacheService,
+  IInventoryService _inventoryService) : ICommandHandler<AddToCartCommand, Result<IEnumerable<Guid>>>
 {
   public async Task<Result<IEnumerable<Guid>>> Handle(AddToCartCommand request, CancellationToken cancellationToken)
   {

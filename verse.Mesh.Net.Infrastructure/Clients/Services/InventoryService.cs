@@ -1,8 +1,8 @@
-﻿using verse.Mesh.Net.Clients.Base;
-using verse.Mesh.Net.Clients.Facade;
-using verse.Mesh.Net.Models;
+﻿using verse.Mesh.Net.Infrastructure.Clients.Base;
+using verse.Mesh.Net.Infrastructure.Clients.Facade;
+using verse.Mesh.Net.Core.Models;
 
-namespace verse.Mesh.Net.Clients.Services;
+namespace verse.Mesh.Net.Infrastructure.Clients.Services;
 
 public class InventoryService(WebApiClient webApiClient) 
   : BaseService(webApiClient), IInventoryService

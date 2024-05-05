@@ -1,7 +1,7 @@
 ﻿using Ardalis.Result;
 using FluentValidation;
 using MediatR;
-using verse.Mesh.Net.Models;
+using verse.Mesh.Net.Core.Models;
 using verse.Mesh.Net.UseCases.Products;
 using verse.Mesh.Net.UseCases.Products.Get;
 

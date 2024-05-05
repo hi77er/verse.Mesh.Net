@@ -13,4 +13,5 @@ public static class AppConstants
   public const string PRODUCTION_ENV = "Production";
 
   public const string ASPNETCORE_ENVIRONMENT_ENV_VAR_NAME = "ASPNETCORE_ENVIRONMENT";
+  public const string INVENTORY_SERVICE_BASE_URL_ENV_VAR_NAME = "INVENTORY_SERVICE_BASE_URL";
 }

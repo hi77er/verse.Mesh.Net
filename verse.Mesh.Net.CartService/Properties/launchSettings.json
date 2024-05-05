@@ -5,7 +5,8 @@
       "launchBrowser": true,
       "launchUrl": "health",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "INVENTORY_SERVICE_BASE_URL": "http://localhost:5239/"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://localhost:5049"
@@ -15,7 +16,8 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/health",
       "environmentVariables": {
-        "ASPNETCORE_HTTP_PORTS": "8080"
+        "ASPNETCORE_HTTP_PORTS": "8080",
+        "INVENTORY_SERVICE_BASE_URL": "http://localhost:5239/"
       },
       "publishAllPorts": true
     }

@@ -1,6 +1,5 @@
-﻿using verse.Mesh.Net.Clients;
-using verse.Mesh.Net.Clients.Base;
-using verse.Mesh.Net.Clients.Facade;
+﻿using verse.Mesh.Net.Infrastructure.Clients.Base;
+using verse.Mesh.Net.Infrastructure.Clients.Facade;
 
 namespace verse.Mesh.Net.InventoryService.FunctionalTests.Base;
 public class BaseFixture
@@ -15,8 +14,7 @@ public class BaseFixture
     var webAppFactory = new CustomWebApplicationFactory<Program>();
     _client = webAppFactory.CreateClient();
 
-    var serviceFactory = new ServiceFactory();
-    _inventoryService = serviceFactory.CreateInventoryService(INVENTORY_SERVICE_BASE_URL);
+    _inventoryService = ServiceFactory.CreateInventoryService(INVENTORY_SERVICE_BASE_URL);
   }
 
   [OneTimeTearDown]

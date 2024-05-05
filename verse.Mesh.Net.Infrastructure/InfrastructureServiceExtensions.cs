@@ -1,7 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.VisualBasic;
 using StackExchange.Redis;
+using verse.Mesh.Net.Infrastructure.Clients.Base;
+using verse.Mesh.Net.Infrastructure.Data.Config;
 using verse.Mesh.Net.Infrastructure.Data.MemCache;
 
 namespace verse.Mesh.Net.Infrastructure;
@@ -51,6 +54,9 @@ public static class InfrastructureServiceExtensions
     //services.AddScoped<IDeleteContributorService, DeleteContributorService>();
 
     //services.Configure<MailserverConfiguration>(config.GetSection("Mailserver"));
+
+    var baseUrl = Environment.GetEnvironmentVariable(AppConstants.INVENTORY_SERVICE_BASE_URL_ENV_VAR_NAME);
+    services.AddScoped(sp => ServiceFactory.CreateInventoryService(baseUrl ?? string.Empty));
 
     //logger.LogInformation("{Project} services registered", "Infrastructure");
 
