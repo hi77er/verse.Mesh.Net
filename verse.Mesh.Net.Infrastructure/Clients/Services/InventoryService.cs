@@ -1,6 +1,6 @@
 ﻿using verse.Mesh.Net.Infrastructure.Clients.Base;
 using verse.Mesh.Net.Infrastructure.Clients.Facade;
-using verse.Mesh.Net.Core.Models;
+using verse.Mesh.Net.Infrastructure.Models;
 
 namespace verse.Mesh.Net.Infrastructure.Clients.Services;
 

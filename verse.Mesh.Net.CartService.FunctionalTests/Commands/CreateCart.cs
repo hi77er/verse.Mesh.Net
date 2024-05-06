@@ -3,7 +3,7 @@ using System.Text.Json;
 using Ardalis.HttpClientTestExtensions;
 using verse.Mesh.Net.CartService.Commands;
 using verse.Mesh.Net.CartService.FunctionalTests.Base;
-using verse.Mesh.Net.Core.Models;
+using verse.Mesh.Net.Infrastructure.Models;
 using verse.Mesh.Net.Infrastructure.Data.Config;
 
 namespace verse.Mesh.Net.CartService.FunctionalTests.Commands;

@@ -1,6 +1,6 @@
 ﻿using Moq;
 using verse.Mesh.Net.Core.CartAggregate;
-using verse.Mesh.Net.Core.Models;
+using verse.Mesh.Net.Infrastructure.Models;
 using verse.Mesh.Net.Core.ProductAggregate;
 using verse.Mesh.Net.Infrastructure.Clients.Facade;
 using verse.Mesh.Net.Infrastructure.Data.MemCache;

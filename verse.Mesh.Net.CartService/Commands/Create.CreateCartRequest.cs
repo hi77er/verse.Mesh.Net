@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using verse.Mesh.Net.Core.Models;
+using verse.Mesh.Net.Infrastructure.Models;
 
 namespace verse.Mesh.Net.CartService.Commands;
 

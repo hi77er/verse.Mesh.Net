@@ -7,7 +7,7 @@ using verse.Mesh.Net.Core.CartAggregate;
 using verse.Mesh.Net.Core.ProductAggregate;
 using verse.Mesh.Net.Core.Shared;
 using verse.Mesh.Net.Infrastructure.Data.MemCache;
-using verse.Mesh.Net.Core.Models;
+using verse.Mesh.Net.Infrastructure.Models;
 
 namespace verse.Mesh.Net.UseCases.Carts.Create;
 
